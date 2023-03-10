@@ -17,7 +17,7 @@ namespace Web.Data.Migrations
                 {
                     RoleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Role = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "DateTime", nullable: false),
                     ModidiedBy = table.Column<int>(type: "int", nullable: false),
@@ -35,7 +35,8 @@ namespace Web.Data.Migrations
                 {
                     UserRoleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    UserIdFK = table.Column<int>(type: "int", nullable: false),
+                    RoleIdFK = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "DateTime", nullable: false),
                     ModidiedBy = table.Column<int>(type: "int", nullable: false),

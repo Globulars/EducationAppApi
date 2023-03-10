@@ -12,7 +12,7 @@ using Web.Data.Data;
 namespace Web.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230306132357_initial")]
+    [Migration("20230310140618_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -48,14 +48,14 @@ namespace Web.Data.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("DateTime");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("Web.Data.Entities.Models.UserRoles", b =>
@@ -81,12 +81,15 @@ namespace Web.Data.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("DateTime");
 
-                    b.Property<int>("RoleId")
+                    b.Property<int>("RoleIdFK")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserIdFK")
                         .HasColumnType("int");
 
                     b.HasKey("UserRoleId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Web.Data.Entities.Models.Users", b =>
@@ -145,7 +148,7 @@ namespace Web.Data.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 #pragma warning restore 612, 618
         }

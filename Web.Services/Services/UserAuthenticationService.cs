@@ -23,7 +23,8 @@ namespace Web.Services.Services
     {
         private readonly DbContext _dbContext;
         private readonly IGenericRepository<Users> _userRepo;
-
+        private readonly IGenericRepository<Roles> _roleRepo;
+        private readonly IGenericRepository<UserRoles> _userroleRepo;
         IConfiguration _config;
 
         private IHostingEnvironment _environment;
@@ -33,14 +34,19 @@ namespace Web.Services.Services
             IConfiguration config,
             //DbContext dbContext,
             //IHostingEnvironment environment,
-            IGenericRepository<Users> userRepo
+            IGenericRepository<Users> userRepo,
+            IGenericRepository<Roles> roleRepo,
+            IGenericRepository<UserRoles> userroleRepo
             )
             
         {
-            //this._config = config;
+            this._config = config;
             //this._environment = environment;
             this._userRepo = userRepo;
             //this._dbContext = dbContext;
+            this._roleRepo = roleRepo;
+
+            this._userroleRepo = userroleRepo;
 
 
 
@@ -61,7 +67,9 @@ namespace Web.Services.Services
                         response.Body = AuthorizedUser;
                         response.Status = HttpStatusCode.OK;
                         response.Message = "User found";
-
+                        user.FullName = user.FullName;
+                        
+                        
                         //this._dbContext.Log(login, "Users", user.UserId, ActivityLogActionEnums.SignIn.ToInt());
                     }
                     else
@@ -84,12 +92,16 @@ namespace Web.Services.Services
 
         private object GenerateJSONWebToken(Users user)
         {
+            var userrole = this._userroleRepo.Table.FirstOrDefault(r => r.UserIdFK == user.UserId);
+            var roleId = userrole.RoleIdFK;
+            var role = this._roleRepo.Table.FirstOrDefault(v => v.RoleId == userrole.RoleIdFK);
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Secret"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
-
+                    
+                     new Claim("FullName", $"{user.FullName}"),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 
             };
@@ -102,7 +114,9 @@ namespace Web.Services.Services
             return new
             {
                 token = new JwtSecurityTokenHandler().WriteToken(token),
-
+               roleId = userrole.RoleIdFK,
+               role = role.Role,
+                fullName = user.FullName,
             };
         }
     }

@@ -15,8 +15,10 @@ namespace Web.Data.Entities.Models
         [Key]
         public int UserRoleId { get; set; }
 
-        [ForeignKey("Role")]
-        public int RoleId { get; set; }
+        [ForeignKey("UserIdFK")]
+        public int UserIdFK { get; set; }
+        [ForeignKey("RoleIdFK")]
+        public int RoleIdFK { get; set; }
         [Column(TypeName = "int")]
         public int CreatedBy { get; set; }
         [Column(TypeName = "DateTime")]
