@@ -1,5 +1,8 @@
 using FluentAssertions.Common;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Web.Data.Data;
 using Web.Data.Generic_Repository;
 using Web.Data.Interfaces;
@@ -13,7 +16,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>();
 string connectionString = builder.Configuration.GetConnectionString("Database")!;
 
@@ -23,10 +25,61 @@ builder.Services.AddDbContext<DataContext>(
         optionsBuilder.UseSqlServer(connectionString,
             b => b.MigrationsAssembly("Web.Data"));
     });
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                   
+                };
+                //options.Events = new JwtBearerEvents
+                //{
+                //    OnAuthenticationFailed = async (context) =>
+                //    {
+                //        context.Response = ;
+                //    }
+                //}
+            });
+
+
+builder.Services.AddSwaggerGen(option =>
+{
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Web App", Version = "v1" });
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. Example: \\\"Authorization: Bearer {token}\\",
+        Name = "Authorization",
+        
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddTransient(typeof(IUserAuthenticationService), typeof(UserAuthenticationService));
+builder.Services.AddTransient(typeof(IUserService), typeof(UserService));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

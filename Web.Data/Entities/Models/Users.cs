@@ -20,6 +20,13 @@ namespace Web.Data.Entities.Models
         [StringLength(100)]
         [Column(TypeName = "varchar(100)")]
         public string UserName { get; set; }
+       
+        [StringLength(50)]
+        [Column(TypeName = "varchar(50)")]
+        public string FirstName { get; set; }
+        [StringLength(50)]
+        [Column(TypeName = "varchar(50)")]
+        public string LastName { get; set; }
         [StringLength(50)]
         [Column(TypeName = "varchar(50)")]
         public string FullName { get; set; }
@@ -38,14 +45,25 @@ namespace Web.Data.Entities.Models
         [Column(TypeName = "int")]
         public int CreatedBy { get; set; }
         [Column(TypeName = "DateTime")]
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
         [Column(TypeName = "int")]
-        public int ModidiedBy { get; set; }
+        public int ModifiedBy { get; set; }
         [StringLength(100)]
         [Column(TypeName = "DateTime")]
         public DateTime? ModifiedDate { get; set; }
         [Column(TypeName = "bit")]
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
+
+       
+
+        
+
+        
+
+        
+
+
+
 
 
     }

@@ -10,6 +10,7 @@ using Web.Services.Services;
 
 namespace Web.App.Controllers
 {
+    
     public class UserAuthenticationController : Controller
     {
         private readonly IUserAuthenticationService _authService;

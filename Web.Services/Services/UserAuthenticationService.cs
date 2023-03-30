@@ -67,7 +67,6 @@ namespace Web.Services.Services
                         response.Body = AuthorizedUser;
                         response.Status = HttpStatusCode.OK;
                         response.Message = "User found";
-                        user.FullName = user.FullName;
                         
                         
                         //this._dbContext.Log(login, "Users", user.UserId, ActivityLogActionEnums.SignIn.ToInt());
@@ -101,7 +100,8 @@ namespace Web.Services.Services
             var claims = new[]
             {
                     
-                     new Claim("FullName", $"{user.FullName}"),
+                     new Claim("FirstName", $"{user.FirstName}"),
+                     new Claim("LastName", $"{user.LastName}"),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 
             };
@@ -116,7 +116,8 @@ namespace Web.Services.Services
                 token = new JwtSecurityTokenHandler().WriteToken(token),
                roleId = userrole.RoleIdFK,
                role = role.Role,
-                fullName = user.FullName,
+                firstName = user.FirstName,
+                lastName = user.LastName
             };
         }
     }

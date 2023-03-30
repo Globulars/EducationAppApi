@@ -21,7 +21,7 @@ namespace Web.Data.Entities.Models
         [Column(TypeName = "DateTime")]
         public DateTime CreatedDate { get; set; }
         [Column(TypeName = "int")]
-        public int ModidiedBy { get; set; }
+        public int ModifiedBy { get; set; }
         [Column(TypeName = "DateTime")]
         public DateTime? ModifiedDate { get; set; }
         [Column(TypeName = "bit")]

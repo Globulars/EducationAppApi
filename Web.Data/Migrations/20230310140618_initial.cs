@@ -20,7 +20,7 @@ namespace Web.Data.Migrations
                     Role = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "DateTime", nullable: false),
-                    ModidiedBy = table.Column<int>(type: "int", nullable: false),
+                    ModifiedBy = table.Column<int>(type: "int", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "DateTime", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -39,7 +39,7 @@ namespace Web.Data.Migrations
                     RoleIdFK = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "DateTime", nullable: false),
-                    ModidiedBy = table.Column<int>(type: "int", nullable: false),
+                    ModifiedBy = table.Column<int>(type: "int", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "DateTime", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -62,7 +62,7 @@ namespace Web.Data.Migrations
                     Address = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "DateTime", nullable: false),
-                    ModidiedBy = table.Column<int>(type: "int", nullable: false),
+                    ModifiedBy = table.Column<int>(type: "int", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "DateTime", maxLength: 100, nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
