@@ -27,7 +27,7 @@ namespace Web.App.Controllers
 
        
 
-        [AllowAnonymous]
+        
         [Description("User Login")]
         [HttpPost("auth/Login")]
         public BaseResponse Login([FromBody] UserCredentialDTO login)

@@ -51,8 +51,16 @@ namespace Web.Services.Services
 
         public BaseResponse GetUserDetails(int UserId)
         {
-            var user = this._userRepo.Table.Where(x => x.UserId == UserId && x.IsActive != false).FirstOrDefault();
-            return new BaseResponse { Status = HttpStatusCode.OK, Message = "Data returned", Body = user };
+            if (UserId > 0)
+            {
+                var user = this._userRepo.Table.Where(x => x.UserId == UserId && x.IsActive != false).FirstOrDefault();
+                return new BaseResponse { Status = HttpStatusCode.OK, Message = "Data returned", Body = user };
+            }
+            else
+            {
+                return new BaseResponse { Status = HttpStatusCode.OK, Message = "Please Enter UserId", };
+
+            }
         }
 
 
@@ -111,15 +119,6 @@ namespace Web.Services.Services
                     IsActive = true
                 };
                 this._userroleRepo.Insert(userRole);
-                Roles role = new Roles()
-                {
-                    RoleId = user.RoleId,
-                    Role = user.Role,
-                    CreatedBy = user.CreatedBy,
-                    CreatedDate = DateTime.Now,
-                    IsActive = true
-                };
-                this._roleRepo.Insert(role);
                 return new BaseResponse { Status = HttpStatusCode.OK, Message = "User created successfully" };
             }
         }
@@ -159,5 +158,19 @@ namespace Web.Services.Services
                 return new BaseResponse { Status = HttpStatusCode.BadRequest, Message = "Password incorrect" };
             }
         }
+
+        //public BaseResponse CheckIfUsernameAvailable(string UserName)
+        //{
+        //    var usernameCount = this._userRepo.Table.Count(x => x.UserName == UserName);
+        //    if (usernameCount > 0)
+        //    {
+        //        return new BaseResponse { Status = HttpStatusCode.OK, Message = "Username already exists", Body = new { usernameAvailable = false, message = "Username already exists" } };
+        //    }
+        //    else
+        //    {
+        //        return new BaseResponse { Status = HttpStatusCode.OK, Message = "Username available", Body = new { usernameAvailable = true, message = "Username available" } };
+
+        //    }
+        //}
     }
 }

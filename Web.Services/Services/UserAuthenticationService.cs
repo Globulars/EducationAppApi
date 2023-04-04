@@ -105,16 +105,17 @@ namespace Web.Services.Services
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 
             };
-
+            var tokenExpiryTime = DateTime.UtcNow.AddMinutes(_config["Jwt:JwtExpiryTime"].Count());
             var token = new JwtSecurityToken(_config["Jwt:ValidIssuer"],
              _config["Jwt:ValidIssuer"],
              claims,
-
+             expires: tokenExpiryTime,
              signingCredentials: credentials);
             return new
             {
                 token = new JwtSecurityTokenHandler().WriteToken(token),
-               roleId = userrole.RoleIdFK,
+                expires = tokenExpiryTime,
+                roleId = userrole.RoleIdFK,
                role = role.Role,
                 firstName = user.FirstName,
                 lastName = user.LastName

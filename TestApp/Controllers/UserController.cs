@@ -97,5 +97,19 @@ namespace Web.App.Controllers
             }
 
         }
+        //[AllowAnonymous]
+        //[Description("User Details")]
+        //[HttpGet("user/CheckIfUsernameAvailable")]
+        //public BaseResponse CheckIfUsernameAvailable(string UserName)
+        //{
+        //    try
+        //    {
+        //        return this._userService.CheckIfUsernameAvailable(UserName);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new BaseResponse() { Status = HttpStatusCode.BadRequest, Message = ex.Message.ToString(), Body = ex.ToString() };
+        //    }
+        //}
     }
 }

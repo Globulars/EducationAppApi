@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 using Web.Data.Data;
 using Web.Data.Generic_Repository;
 using Web.Data.Interfaces;
@@ -34,15 +35,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                   
                 };
-                //options.Events = new JwtBearerEvents
-                //{
-                //    OnAuthenticationFailed = async (context) =>
-                //    {
-                //        context.Response = ;
-                //    }
-                //}
+               
             });
 
 
@@ -52,7 +46,7 @@ builder.Services.AddSwaggerGen(option =>
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme. Example: \\\"Authorization: Bearer {token}\\",
+        Description = "Token",
         Name = "Authorization",
         
         Type = SecuritySchemeType.Http,
@@ -79,6 +73,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddTransient(typeof(IUserAuthenticationService), typeof(UserAuthenticationService));
 builder.Services.AddTransient(typeof(IUserService), typeof(UserService));
+builder.Services.AddTransient(typeof(IRoleService), typeof(RoleService));
 
 var app = builder.Build();
 

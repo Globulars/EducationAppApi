@@ -16,15 +16,13 @@ namespace Web.DTO.Common
         public int RoleId { get; set; }
         [StringLength(50)]
         [Column(TypeName = "varchar(50)")]
-        public string Name { get; set; }
+        public string Role { get; set; }
         [Column(TypeName = "int")]
         public int CreatedBy { get; set; }
-        [Column(TypeName = "DateTime")]
-        public DateTime CreatedDate { get; set; }
+       
         [Column(TypeName = "int")]
         public int ModifiedBy { get; set; }
-        [Column(TypeName = "DateTime")]
-        public DateTime? ModifiedDate { get; set; }
+       
         [Column(TypeName = "bit")]
         public bool IsActive { get; set; }
     }
