@@ -74,6 +74,7 @@ builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericReposi
 builder.Services.AddTransient(typeof(IUserAuthenticationService), typeof(UserAuthenticationService));
 builder.Services.AddTransient(typeof(IUserService), typeof(UserService));
 builder.Services.AddTransient(typeof(IRoleService), typeof(RoleService));
+builder.Services.AddTransient(typeof(IComponentService), typeof(ComponentService));
 
 var app = builder.Build();
 
