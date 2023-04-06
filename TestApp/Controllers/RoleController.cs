@@ -26,7 +26,6 @@ namespace Web.App.Controllers
             this._roleService = roleService;
 
         }
-
         [AllowAnonymous]
         [Description("All Role")]
         [HttpGet("role/GetAllRole")]

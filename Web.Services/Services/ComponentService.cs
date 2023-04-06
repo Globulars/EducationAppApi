@@ -65,7 +65,7 @@ namespace Web.Services.Services
             var componentList = _componentRepo.Table.Where(x => x.IsActive == true);
             var responseList = componentList.Select(component => new ComponentDTO
             {
-
+                ComponentId = component.ComponentId,
                 ComModuleName = component.ComModuleName,
                 PageUrl = component.PageUrl,
                 PageName = component.PageName,
@@ -83,8 +83,8 @@ namespace Web.Services.Services
         {
             if (ComponentId > 0)
             {
-                var components = this._componentRepo.Table.Where(x => x.ComponentId == ComponentId && x.IsActive != false).FirstOrDefault();
-                return new BaseResponse { Status = HttpStatusCode.OK, Message = "Data returned", Body = components };
+                var component = this._componentRepo.Table.Where(x => x.ComponentId == ComponentId && x.IsActive != false).FirstOrDefault();
+                return new BaseResponse { Status = HttpStatusCode.OK, Message = "Data returned", Body = component };
             }
             else
             {

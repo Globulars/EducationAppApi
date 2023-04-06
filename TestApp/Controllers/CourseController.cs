@@ -3,59 +3,37 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.Net;
 using Web.DTO.Common;
-using Web.Models.Common;
 using Web.Models.Response;
 using Web.Services.Interfaces;
-using Web.Services.Services;
 
 namespace Web.App.Controllers
 {
     [Authorize]
-    public class ComponentController : Controller
+    public class CourseController : Controller
     {
-
-        private readonly IComponentService _authService;
+        private readonly ICourseService _authService;
         private IConfiguration _config;
 
         private IWebHostEnvironment _hostEnvironment;
 
-        private IComponentService _componentService;
-        public ComponentController(IComponentService authService, IConfiguration config, IWebHostEnvironment environment, IComponentService componentService)
+        private ICourseService _courseService;
+        public CourseController(ICourseService authService, IConfiguration config, IWebHostEnvironment environment, ICourseService courseService)
         {
             this._authService = authService;
             this._config = config;
             this._hostEnvironment = environment;
-            this._componentService = componentService;
+            this._courseService = courseService;
 
         }
-
         [AllowAnonymous]
-        [Description("All Components")]
-        [HttpGet("role/GetAllComponent")]
-        public BaseResponse GetAllComponent()
+        [Description("Save Course")]
+        [HttpPost("course/SaveCourse")]
+        public BaseResponse SaveCourse([FromBody] CourseDTO course)
         {
 
             try
             {
-                var responseList = this._componentService.GetAllComponent();
-                return new BaseResponse() { Status = HttpStatusCode.OK, Message = "Component's list returned", Body = responseList };
-            }
-            catch (Exception ex)
-            {
-
-                return new BaseResponse() { Status = HttpStatusCode.BadRequest, Message = ex.Message.ToString(), Body = ex.ToString() };
-            }
-
-        }
-        [AllowAnonymous]
-        [Description("Save Component")]
-        [HttpPost("component/SaveComponent")]
-        public BaseResponse SaveComponent([FromBody] ComponentDTO component)
-        {
-
-            try
-            {
-                BaseResponse response = _authService.SaveComponent(component);
+                BaseResponse response = _authService.SaveCourse(course);
                 return response;
             }
             catch (Exception ex)
@@ -66,13 +44,31 @@ namespace Web.App.Controllers
 
         }
         [AllowAnonymous]
-        [Description("Component Details")]
-        [HttpGet("component/GetComponentDetails")]
-        public BaseResponse GetComponentDetails(int ComponentId)
+        [Description("All Course")]
+        [HttpGet("course/GetAllCourse")]
+        public BaseResponse GetAllCourse()
+        {
+
+            try
+            {
+                var responseList = this._courseService.GetAllCourse();
+                return new BaseResponse() { Status = HttpStatusCode.OK, Message = "Course's list returned", Body = responseList };
+            }
+            catch (Exception ex)
+            {
+
+                return new BaseResponse() { Status = HttpStatusCode.BadRequest, Message = ex.Message.ToString(), Body = ex.ToString() };
+            }
+
+        }
+        [AllowAnonymous]
+        [Description("Course Details")]
+        [HttpGet("course/GetCourseDetails")]
+        public BaseResponse GetCourseDetails(int CourseId)
         {
             try
             {
-                return this._componentService.GetComponentDetails(ComponentId);
+                return this._courseService.GetCourseDetails(CourseId);
             }
             catch (Exception ex)
             {

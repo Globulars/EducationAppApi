@@ -45,6 +45,8 @@ namespace Web.Data.Data
 
         public virtual DbSet<ComponentAccess> ComponentAccess { get; set; }
 
+        public virtual DbSet<Courses> Courses { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -56,6 +58,7 @@ namespace Web.Data.Data
             modelBuilder.Entity<UserRoles>().ToTable("UserRoles");
             modelBuilder.Entity<Components>().ToTable("Components");
             modelBuilder.Entity<ComponentAccess>().ToTable("ComponentAccess");
+            modelBuilder.Entity<Courses>().ToTable("Courses");
         }
     }
 

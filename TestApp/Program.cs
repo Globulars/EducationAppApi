@@ -75,7 +75,7 @@ builder.Services.AddTransient(typeof(IUserAuthenticationService), typeof(UserAut
 builder.Services.AddTransient(typeof(IUserService), typeof(UserService));
 builder.Services.AddTransient(typeof(IRoleService), typeof(RoleService));
 builder.Services.AddTransient(typeof(IComponentService), typeof(ComponentService));
-
+builder.Services.AddTransient(typeof(ICourseService), typeof(CourseService));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
