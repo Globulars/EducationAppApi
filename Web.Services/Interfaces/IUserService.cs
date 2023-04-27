@@ -15,7 +15,7 @@ namespace Web.Services.Interfaces
         BaseResponse SaveUser(UserDTO user);
         BaseResponse UpdatePassword(UserPasswordDTO user);
         IQueryable<UserDTO> GetAllUser();
-
-        //BaseResponse CheckIfUsernameAvailable(string UserName);
+        BaseResponse DeleteUser(int UserId);
+        BaseResponse CheckIfUsernameAvailable(string UserName);
     }
 }

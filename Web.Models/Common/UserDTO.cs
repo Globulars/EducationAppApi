@@ -46,15 +46,12 @@ namespace Web.Models.Common
         [Key]
         public int RoleId { get; set; }
         public string Role { get; set; }
-
         public class UserPasswordDTO
         {
             public int UserId { get; set; }
             public string OldPassword { get; set; }
             public string NewPassword { get; set; }
         }
-
-
 
     }
 }

@@ -124,5 +124,20 @@ namespace Web.Services.Services
 
             }
         }
+
+        public BaseResponse DeleteCourse(int CourseId)
+        {
+            if (CourseId > 0)
+            {
+                var dbUser = this._courseRepo.Table.Where(x => x.CourseId == CourseId && x.IsActive != false).FirstOrDefault();
+                this._courseRepo.Delete(dbUser);
+                return new BaseResponse { Status = HttpStatusCode.OK, Message = "Courses Deleted", };
+            }
+            else
+            {
+                return new BaseResponse { Status = HttpStatusCode.OK, Message = "Please Enter CourseId", };
+
+            }
+        }
     }
 }

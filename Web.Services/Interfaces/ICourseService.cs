@@ -15,5 +15,7 @@ namespace Web.Services.Interfaces
         IQueryable<CourseDTO> GetAllCourse();
 
         BaseResponse GetCourseDetails(int CourseId);
+
+        BaseResponse DeleteCourse(int CourseId);
     }
 }

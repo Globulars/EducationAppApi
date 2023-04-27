@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Web.Data.Entities.Models
 {
-    public class ComponentAccess
+    public class Booking
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int ComponentAccessId { get; set; }
+        public int BookingId { get; set; }
 
         [ForeignKey("ComponentIdFK")]
-        public int ComponentIdFK { get; set; }
+        public int UserIdFK { get; set; }
         [Column(TypeName = "int")]
         public int CreatedBy { get; set; }
         [Column(TypeName = "DateTime")]

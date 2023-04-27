@@ -47,6 +47,7 @@ namespace Web.Data.Data
 
         public virtual DbSet<Courses> Courses { get; set; }
 
+        public virtual DbSet<Booking> Booking { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -59,6 +60,7 @@ namespace Web.Data.Data
             modelBuilder.Entity<Components>().ToTable("Components");
             modelBuilder.Entity<ComponentAccess>().ToTable("ComponentAccess");
             modelBuilder.Entity<Courses>().ToTable("Courses");
+            modelBuilder.Entity<Booking>().ToTable("Booking");
         }
     }
 

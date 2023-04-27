@@ -63,6 +63,21 @@ namespace Web.Services.Services
             }
         }
 
+        public BaseResponse DeleteUser(int UserId)
+        {
+            if (UserId > 0)
+            {
+                var dbUser = this._userRepo.Table.Where(x => x.UserId == UserId && x.IsActive != false).FirstOrDefault();
+                this._userRepo.Delete(dbUser);
+                return new BaseResponse { Status = HttpStatusCode.OK, Message = "Users Deleted", };
+            }
+            else
+            {
+                return new BaseResponse { Status = HttpStatusCode.OK, Message = "Please Enter UserId", };
+
+            }
+        }
+
 
         public BaseResponse SaveUser(UserDTO user)
         {
@@ -159,18 +174,18 @@ namespace Web.Services.Services
             }
         }
 
-        //public BaseResponse CheckIfUsernameAvailable(string UserName)
-        //{
-        //    var usernameCount = this._userRepo.Table.Count(x => x.UserName == UserName);
-        //    if (usernameCount > 0)
-        //    {
-        //        return new BaseResponse { Status = HttpStatusCode.OK, Message = "Username already exists", Body = new { usernameAvailable = false, message = "Username already exists" } };
-        //    }
-        //    else
-        //    {
-        //        return new BaseResponse { Status = HttpStatusCode.OK, Message = "Username available", Body = new { usernameAvailable = true, message = "Username available" } };
+        public BaseResponse CheckIfUsernameAvailable(string UserName)
+        {
+            var usernameCount = this._userRepo.Table.Count(x => x.UserName == UserName);
+            if (usernameCount > 0)
+            {
+                return new BaseResponse { Status = HttpStatusCode.OK, Message = "Username already exists", Body = new { usernameAvailable = false, message = "Username already exists" } };
+            }
+            else
+            {
+                return new BaseResponse { Status = HttpStatusCode.OK, Message = "Username available", Body = new { usernameAvailable = true, message = "Username available" } };
 
-        //    }
-        //}
+            }
+        }
     }
 }

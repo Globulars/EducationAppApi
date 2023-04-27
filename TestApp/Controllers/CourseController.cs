@@ -76,5 +76,19 @@ namespace Web.App.Controllers
             }
 
         }
+        [AllowAnonymous]
+        [Description("Course Delete")]
+        [HttpDelete("course/DeleteCourse")]
+        public BaseResponse DeleteCourse(int CourseId)
+        {
+            try
+            {
+                return this._courseService.DeleteCourse(CourseId);
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse() { Status = HttpStatusCode.BadRequest, Message = ex.Message.ToString(), Body = ex.ToString() };
+            }
+        }
     }
 }
