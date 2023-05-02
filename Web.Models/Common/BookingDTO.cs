@@ -7,18 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Web.DTO.Common
+namespace Web.Models.Common
 {
-    public class ComponentAccessDTO
+    public class BookingDTO
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int ComponentAccessId { get; set; }
-        [ForeignKey("ComponentIdFK")]
-        public int ComponentIdFK { get; set; }
-        [ForeignKey("RoleIdFK")]
-        public int RoleIdFK { get; set; }
+        public int BookingId { get; set; }
+        public DateOnly BookingDate { get; set; }
         [Column(TypeName = "int")]
+        public int BookingNo { get; set; }
+        [StringLength(50)]
+        [Column(TypeName = "varchar(50)")]
+        public string BookingStatus { get; set; }
         public int CreatedBy { get; set; }
         [Column(TypeName = "DateTime")]
         public DateTime CreatedDate { get; set; }

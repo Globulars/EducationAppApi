@@ -58,7 +58,6 @@ namespace Web.Services.Services
 
 
         }
-
         public IQueryable<ComponentDTO> GetAllComponent()
         {
             var component = _componentRepo.Table.Where(r => r.IsActive == true);
@@ -149,7 +148,6 @@ namespace Web.Services.Services
                 this._componentAccessRepo.Insert(ComponentAccess);
                 return new BaseResponse { Status = HttpStatusCode.OK, Message = "Component created successfully" };
             }
-
 
         }
     }

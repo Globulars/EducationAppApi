@@ -11,11 +11,8 @@ namespace Web.Services.Interfaces
     public interface ICourseService
     {
         BaseResponse SaveCourse(CourseDTO course);
-
         IQueryable<CourseDTO> GetAllCourse();
-
         BaseResponse GetCourseDetails(int CourseId);
-
         BaseResponse DeleteCourse(int CourseId);
     }
 }

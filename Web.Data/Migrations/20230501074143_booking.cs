@@ -12,12 +12,14 @@ namespace Web.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Booking",
+                name: "Bookings",
                 columns: table => new
                 {
                     BookingId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserIdFK = table.Column<int>(type: "int", nullable: false),
+                    BookingDate = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    BookingNo = table.Column<int>(type: "int", nullable: false),
+                    BookingStatus = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "DateTime", nullable: false),
                     ModifiedBy = table.Column<int>(type: "int", nullable: false),
@@ -34,7 +36,7 @@ namespace Web.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Booking");
+                name: "Bookings");
         }
     }
 }

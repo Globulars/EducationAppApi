@@ -12,9 +12,7 @@ namespace Web.Services.Interfaces
     public interface IRoleService
     {
         IQueryable<RoleDTO> GetAllRole();
-
         BaseResponse GetRoleDetails(int RoleId);
-
         BaseResponse SaveRole(RoleDTO role);
     }
 }

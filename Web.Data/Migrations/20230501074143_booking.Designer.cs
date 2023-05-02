@@ -12,7 +12,7 @@ using Web.Data.Data;
 namespace Web.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230410095544_booking")]
+    [Migration("20230501074143_booking")]
     partial class booking
     {
         /// <inheritdoc />
@@ -32,6 +32,17 @@ namespace Web.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
+
+                    b.Property<DateTime>("BookingDate")
+                        .HasColumnType("DateTime");
+
+                    b.Property<int>("BookingNo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BookingStatus")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");

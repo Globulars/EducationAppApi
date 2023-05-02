@@ -30,6 +30,17 @@ namespace Web.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
 
+                    b.Property<DateTime>("BookingDate")
+                        .HasColumnType("DateTime");
+
+                    b.Property<int>("BookingNo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BookingStatus")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
@@ -45,8 +56,6 @@ namespace Web.Data.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("DateTime");
 
-                    b.Property<int>("UserIdFK")
-                        .HasColumnType("int");
 
                     b.HasKey("BookingId");
 

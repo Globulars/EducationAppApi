@@ -9,10 +9,11 @@ using Web.Models.Response;
 
 namespace Web.Services.Interfaces
 {
-    public interface IComponentService
+    public interface IBookingService
     {
-        BaseResponse SaveComponent(ComponentDTO component);
-        BaseResponse GetComponentDetails(int ComponentId);
-        IQueryable<ComponentDTO> GetAllComponent();
+        BaseResponse SaveBooking(BookingDTO book);
+        IQueryable<BookingDTO> GetAllBooking();
+        BaseResponse GetBookingDetails(int BookingId);
+        BaseResponse DeleteBooking(int BookingId);
     }
 }

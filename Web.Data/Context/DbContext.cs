@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -34,6 +36,23 @@ namespace Web.Data.Data
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }
+        protected override void ConfigureConventions(ModelConfigurationBuilder builder)
+        {
+            builder.Properties<DateOnly>()
+                   .HaveConversion<DateOnlyConverter>()
+                   .HaveColumnType("Date");
+        }
+
+        public class DateOnlyConverter : ValueConverter<DateOnly, DateTime>
+        {
+            /// <summary>
+            /// Creates a new instance of this converter.
+            /// </summary>
+            public DateOnlyConverter() : base(
+                    d => d.ToDateTime(TimeOnly.MinValue),
+                    d => DateOnly.FromDateTime(d))
+            { }
+        }
 
         public virtual DbSet<Users> Users { get; set; }
 
@@ -47,7 +66,7 @@ namespace Web.Data.Data
 
         public virtual DbSet<Courses> Courses { get; set; }
 
-        public virtual DbSet<Booking> Booking { get; set; }
+        public virtual DbSet<Bookings> Bookings { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -60,7 +79,7 @@ namespace Web.Data.Data
             modelBuilder.Entity<Components>().ToTable("Components");
             modelBuilder.Entity<ComponentAccess>().ToTable("ComponentAccess");
             modelBuilder.Entity<Courses>().ToTable("Courses");
-            modelBuilder.Entity<Booking>().ToTable("Booking");
+            modelBuilder.Entity<Bookings>().ToTable("Bookings");
         }
     }
 

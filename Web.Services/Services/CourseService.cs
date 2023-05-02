@@ -129,8 +129,8 @@ namespace Web.Services.Services
         {
             if (CourseId > 0)
             {
-                var dbUser = this._courseRepo.Table.Where(x => x.CourseId == CourseId && x.IsActive != false).FirstOrDefault();
-                this._courseRepo.Delete(dbUser);
+                var dbCourse = this._courseRepo.Table.Where(x => x.CourseId == CourseId && x.IsActive != false).FirstOrDefault();
+                this._courseRepo.Delete(dbCourse);
                 return new BaseResponse { Status = HttpStatusCode.OK, Message = "Courses Deleted", };
             }
             else

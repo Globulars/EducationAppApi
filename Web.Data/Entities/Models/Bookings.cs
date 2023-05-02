@@ -9,15 +9,18 @@ using System.Threading.Tasks;
 
 namespace Web.Data.Entities.Models
 {
-    public class Booking
+    public class Bookings
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int BookingId { get; set; }
-
-        [ForeignKey("ComponentIdFK")]
-        public int UserIdFK { get; set; }
         [Column(TypeName = "int")]
+        public DateOnly BookingDate { get; set; }
+        [Column(TypeName = "int")]
+        public int BookingNo { get; set; }
+        [StringLength(50)]
+        [Column(TypeName = "varchar(50)")]
+        public string BookingStatus { get; set; }
         public int CreatedBy { get; set; }
         [Column(TypeName = "DateTime")]
         public DateTime CreatedDate { get; set; }
