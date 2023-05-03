@@ -66,7 +66,7 @@ namespace Web.Services.Services
             BaseResponse response = new BaseResponse();
             if (booking.BookingId > 0)
             {
-                var dbBooking = this._bookingRepo.Table.Where(b => b.BookingId == booking.BookingId && b.IsActive != false).FirstOrDefault();
+                var dbBooking = this._bookingRepo.Table.Where(x => x.BookingId == booking.BookingId && x.IsActive != false).FirstOrDefault();
 
                 if (dbBooking.BookingId == booking.BookingId)
                 {

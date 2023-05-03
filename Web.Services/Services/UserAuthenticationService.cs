@@ -88,7 +88,6 @@ namespace Web.Services.Services
             return response;
 
         }
-
         private object GenerateJSONWebToken(Users user)
         {
             var userrole = this._userroleRepo.Table.FirstOrDefault(r => r.UserIdFK == user.UserId);

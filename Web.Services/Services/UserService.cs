@@ -27,6 +27,8 @@ namespace Web.Services.Services
         IConfiguration _config;
 
         private IHostingEnvironment _environment;
+        
+
         public UserService(
             IConfiguration config,
             //DbContext dbContext,
@@ -139,7 +141,10 @@ namespace Web.Services.Services
         }
         public IQueryable<UserDTO> GetAllUser()
         {
-            var role = _roleRepo.Table.Where(r => r.IsActive == true);
+            var user = this._userRepo.Table.FirstOrDefault(r => r.IsActive == true);
+            var userrole = this._userroleRepo.Table.FirstOrDefault(r => r.UserIdFK == user.UserId);
+            var roleId = userrole.RoleIdFK;
+            var role = this._roleRepo.Table.FirstOrDefault(v => v.RoleId == userrole.RoleIdFK);
             var userList = _userRepo.Table.Where(x => x.IsActive == true);
             var responseList = userList.Select(user => new UserDTO 
             {
@@ -150,8 +155,8 @@ namespace Web.Services.Services
                 LastName = user.LastName,
                 Email = user.Email,
                 Phone = user.Phone,
-                RoleId = user.UserId,
-                Role = this._roleRepo.Table.Where(r => r.RoleId == user.UserId).Select(r => r.Role).FirstOrDefault(),
+                RoleId = userrole.RoleIdFK,
+                Role = this._roleRepo.Table.Where(r => r.RoleId == role.RoleId).Select(r => r.Role).FirstOrDefault(),
                 Address = user.Address,
                 CreatedBy = user.CreatedBy,
                 Password = user.Password,
